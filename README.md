@@ -1,40 +1,60 @@
-# ICESI University - SwArch Homework 1
+# Callback 
+<br/>
 
-## Collaborators:
-- Juan Pablo Acevedo
-- Jesus Garces
-- Martin Cifuentes
+## Trabajo por: Gabriel Delgado y Felipe Barreto
+<br/>
+<p>Este trabajo es la implementación del patron de diseño Callback para un chat entre maquinas. Se usa la consola como interface</p> <br/>
 
-This repository contains the source code for a homework assignment in the System Engineering course at ICESI University. The project is implemented using Java programming language, ICE middleware, and Gradle build system.
+## Ramas
 
-## Assignment Description:
-The goal of this assignment is to implement a client-server interaction using ICE middleware. The server is designed to handle various types of messages from the client and provide appropriate responses. The server extracts relevant information like the username and hostname of the client to enhance the output.
+### rama 1
+<p>Este proyecto tiene 3 ramas, la parte 1 es la saturación del programa usando el hello world orginal</p>
+<br/>
+<p>Esta rama solo funciona de manera local, puedes correr los clientes usando java -jar client.jar o server.jar</p>
+<br/>
+<p>Cuando esten corriendo tanto el servidor y cliente, en el cliente pon cualquier entrada (por ejemplo 1) un espacio y enter, esto empieza un loop infinito con la idea de saturar el cliente, puedes correr cuantos clientes quieras</p>
+<br/>
+<p>El config del servidor solo tiene 1 thread, así que es probable que se sature rapido el servidor, además, la implementación del fibonacci es recursiva, lo cual no es lo más optino</p>
 
-## Project Structure:
-The project is divided into two main parts: the client and the server.
+### rama 2
+<p>La segunda es el callback solo con el fibonacci implementado</p>
+<br/>
+<p>Este rama tambien solo funciona de manera local pero tiene 3 threads, y corre al usar una entrada cualquiera seguido un espacio (por ejemplo: "1 ")</p>
+<br/>
+<p>Por la implemetanción del callback, el cliente no tendra un timeout, dado que este no espera la respuesta del servior</p>
+<br/>
+<p>Dicho esto, si quieres desplegar multiples clientes de manera local, sera un poco complicado. Ten encuenta que ahora cada cliente tiene un puerto, por ende, si intentas desplegar dos clientes, solo podras desplegar 1, dado que tu puerto ya estaria ocupado. <br/>
+Por ende, tendras que cambiar el puerto en el config y volver a hacer gradle build. Además de cambiarle el puerto, tiene que asegurarte que tengan un nombre diferente, por lo cual tendras que añadirle algo para diferenciarlo. <br/>
+Sin embargo, todo esto hay forma de hacerlo en gradle, lastimosamente por temas de tiempo, no se llego a implementar</p>
 
-### Client:
-The client code (`Client.java`) is responsible for sending messages to the server. It interacts with the user, constructs messages with the client's username and hostname, and sends them to the server for processing. The client receives responses from the server and displays them in the console.
+## Rama principal
 
-### Server:
-The server code (`Server.java`) initializes an ICE communicator, sets up an object adapter, and implements the core logic for handling different types of messages. It processes messages based on specified patterns and returns relevant information to the client. The server also incorporates utility methods for prime factorization, listing logical interfaces, listing open ports, and executing commands.
+<p>La rama master, esta es la implementación del callback con el chat</p>
+<br/>
+<p>Este callback esta desplegado en hgrid7 (servidor), hgrid9 (cliente) y hgrid10(cliente)</p>
+<br/>
+<p>Para correr el servidor, usa el comando: java -jar server.jar</p>
+<br/>
+<p>Para correr el cliente, usa el comando: java -jar client.jar</p>
+<br/>
+<p>Si quieres desplegar otro cliente debes modificar el config.client de la siguiente forma:</p>
+<br/>
+<p>Callback.Endpoints = tcp -h [dirección ip de maquina donde esta el cliente o nombre de la maquina] -p [puerto donde quieres exponer el servicio]</p>
+<br/>
+<p>Ice.Default.Host = [dirección ip de maquina donde esta el servidor o nombre de la maquina]</p>
+<br/>
+<br>
+<p>En el caso de que quieras desplegar otro servidor, solo tienes que modificar el Ice.Default.Host, asignandole la maquina donde se encuentra el servidor</p>
+<br/>
+<p>Si tienes dudas puedes revisar el config del servidor o cliente de este proyecto</p>
+<br/>
+<p>Para usar el callback debes desplegar el servidor y al menos 1 cliente, de ahi puede usar el comando "Help" para ver los posibles comandos y que hacen, en todo caso aqui esta la lista</p>
+<br/>
+<ol>
+  <li>BC [msg] : envia un mensaje a todos los clientes conectados</li>
+  <li>list clients : lista los clientes conectados</li>
+  <li>to [hostname]:[msg] : envia un mensaje a un cliente especifico</li>
+  <li>fibonacci: [numero] : retorna la serie de fibonacci hasta [numero]</li>
+</ol>
+<p>cabe resaltar que esta implementación del fibonacci es con un loop, así que es más rapidas que las de las otras ramas</p>
 
-## How to Run:
-1. Clone the repository to your local machine.
-2. Navigate to the project directory using the command line.
-3. To run the server, execute the following command: ./gradlew server
-4. To run the client, execute the following command: ./gradlew client
-5. Follow the prompts in the client's console to interact with the server. You can enter various types of messages and observe the server's responses.
-
-## Note:
-This project is intended for educational purposes as part of the System Engineering course at ICESI University. Feel free to explore, modify, and learn from the code.
-
-If you have any questions or need further assistance, please contact the collaborators: Juan Pablo Acevedo, Martin cifuentes and Jesus Garces.
-
-## Importand
-Change the client and server .config file
-
-**Languages Used:**
-- Java
-- ICE Middleware
-- Gradle Build System
