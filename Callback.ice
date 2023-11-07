@@ -6,7 +6,12 @@ module Demo
     interface Callback
     {
         void printMsg(string s);
-    }
+    };
+
+    interface Printer
+    {
+        void printString(string s);
+    };
 
     interface ChatManager
     {
@@ -16,7 +21,7 @@ module Demo
         StringSeq getState();
 
         void sendMessage(string msg, string hostname);
-    }
+    };
 
-    
-}
+
+};
