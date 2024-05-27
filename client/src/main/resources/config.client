@@ -11,12 +11,13 @@
 
 
 # Only listen on the ZeroTier's LIASOn1 interface by default.
-#
+
 #Ice.Default.Host=localhost
 
 
-Callback.Endpoints = tcp -h 10.147.19.76 -p 10008
+Callback.Endpoints = tcp -h 192.168.1.2 -p 10008
 
 ChatManager.Proxy = ChatManager: default -p 8000
 
-Ice.Default.Host = 10.147.19.76
+Ice.Default.Host = 192.168.1.8
+#10.147.19.76

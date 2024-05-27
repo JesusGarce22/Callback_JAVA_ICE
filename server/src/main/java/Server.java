@@ -3,6 +3,8 @@ import java.io.*;
 public class Server {
     public static void main(String[] args) {
         try (com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, "config.server")) {
+            System.out.println("Server start");
+
             // Create an object adapter to handle incoming requests.
             com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Service");
 
